@@ -1,0 +1,27 @@
+Date Built: 2026-09-13T03:18:17.067Z
+    
+VERCEL_GIT_COMMIT_SHA: ba10e6446eed6c8cd4a93d44a28845a234bfb670
+VERCEL_GIT_COMMIT_MESSAGE: fix: [MIN-4739] let SCORM launches without a learner id through (#6399)
+
+* Reapply "fix: [MIN-3454] require explicit SCORM learner identity (#6236)"
+
+Restores #6236 as the base for MIN-4739, which keeps its launch-error
+handling and launch telemetry but drops the blank-identity rejection.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MUbtAuFt3qYXtNg8pY5LYE
+
+* fix: [MIN-4739] give identity-less SCORM launches a learner of their own
+
+Some LMSs never populate the learner id, so #6236 rejecting those launches
+locked every new learner on them out. A launch without an id now creates a
+learner that never matches an existing row, the treatment an unknown domain
+already gets, so the MIN-3454 merge stays fixed. Repeated ids are still
+refused, and scorm_launch records identityProvided.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01MUbtAuFt3qYXtNg8pY5LYE
+
+---------
+
+Co-authored-by:
